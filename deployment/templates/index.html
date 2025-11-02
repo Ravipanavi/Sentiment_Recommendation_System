@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sentiment-Based Product Recommendation</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>🛒 Sentiment-Based Product Recommendation System</h1>
+    <p>Enter a review or username to get predictions!</p>
+
+    <div class="form-box">
+      <h2>🔍 Sentiment Analysis</h2>
+      <form method="POST" action="/predict">
+        <textarea name="review" placeholder="Type your product review..." rows="5" required></textarea>
+        <br>
+        <button type="submit">Predict Sentiment</button>
+      </form>
+      {% if prediction %}
+        <p class="result">Predicted Sentiment: <strong>{{ prediction }}</strong></p>
+      {% endif %}
+    </div>
+
+    <div class="form-box">
+      <h2>⭐ Product Recommendations</h2>
+      <form method="POST" action="/recommend">
+        <input type="text" name="username" placeholder="Enter username..." required>
+        <br>
+        <button type="submit">Get Recommendations</button>
+      </form>
+      {% if recommendations %}
+        <h3>Top 5 Recommended Products:</h3>
+        <ul>
+          {% for product in recommendations %}
+            <li>{{ product }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+  </div>
+</body>
+</html>
